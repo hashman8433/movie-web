@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VideoPlayer from 'vue-video-player'
+import axios from 'axios'
+import Element from 'element-ui';
+
 
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
@@ -11,6 +14,9 @@ require('vue-video-player/src/custom-theme.css')
 Vue.config.productionTip = false
 
 Vue.use(VideoPlayer)
+Vue.use(axios)
+Vue.use(ElementUI);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
