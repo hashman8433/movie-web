@@ -30,21 +30,24 @@
 <script>
   // custom skin css
   // import '../src/custom-theme.css'
-  
+  const router = require('router');
   export default {
     data() {
+    	
+    	console.log(this.$route.query.filePathWeb)
       return {
         // videojs options
         playerOptions: {
           height: '360',
           autoplay: true,
-          muted: true,
+          muted: false,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],
           sources: [{
             type: "video/mp4",
             // mp4
-            src: "/static/005_3xplanet_APAK-088.mp4",
+//          src: "/static/005_3xplanet_APAK-088.mp4",
+            src: "/static/movie" + this.$route.query.filePathWeb,
             // webm
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
           }],
