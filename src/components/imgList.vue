@@ -3,7 +3,6 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
-      	
         prop="id"
         label="预览图片"
         width="300">
