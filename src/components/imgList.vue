@@ -1,4 +1,6 @@
 <template>
+	<dev>
+   
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -14,6 +16,7 @@
       </el-table-column>
             
     </el-table>
+    </dev>
 </template>
 
 <script>
