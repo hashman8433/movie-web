@@ -42,9 +42,7 @@
 		  	console.log(this._data.num++)
 		  	console.log(this._data)
 		  	axios.post('/api/movie/imgFile/list', {
-			    params: {
-			      videoFileId: outThis.$route.query.videoFileId
-			    }
+		    	videoFileId: outThis.$route.query.videoFileId
 			  })
 			  .then(function (response) {
 			  	console.log(response.data.data);
