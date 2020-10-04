@@ -6,6 +6,7 @@ import router from './router'
 import VideoPlayer from 'vue-video-player'
 import axios from 'axios'
 import ElementUI from 'element-ui'
+import { Message } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
