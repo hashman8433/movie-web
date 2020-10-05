@@ -23,7 +23,11 @@ export default new Router({
     {
       path: '/videoList',
       name: 'videoList',
-      component: videoList
+      component: videoList,
+      meta: {
+		requireAuth: true,
+		keepAlive: false, //此组件不需要被缓存
+      },
     },
     {
       path: '/imgList',

@@ -41,7 +41,7 @@
 		},
       methods: {
       	item() {
-	    	var outThis = this;
+	    		var outThis = this;
 		  	console.log(this._data.num++)
 		  	console.log(this._data)
 		  	axios.post('/api/movie/imgFile/list', {

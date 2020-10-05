@@ -1,6 +1,6 @@
 <template>
 	<dev>
-		<el-form :inline="true"	:model="formInline">
+		<el-form :inline="true"	>
 			<el-form-item label="影片名称" label-width="auto">
 				<el-input v-model="form.fileName" label-width="60%"></el-input>
 			</el-form-item>
@@ -9,16 +9,41 @@
 			</el-form-item>
 		</el-form>
 		
-		<el-table :data="tableData">
+		<!-- ++++++++++++++++ 预览电影截图 start ++++++++++++++-->
+		<el-drawer
+		  title="预览图片"
+		  :visible.sync="drawer"
+		  size="80%"
+		  :with-header="false">
+		  <span>预览电影</span>
+		  <el-table
+		      :data="imgData"
+		      style="width: 100%">
+		      <el-table-column
+		        prop="id"
+		        label=""
+		        width="300">
+		        
+		        <template slot-scope="scope">
+			        <img @click="handleClick(scope.row)" style="width:80%;" 
+			        	:src="scope.row.filePathWeb" />
+				</template>
+		      </el-table-column>
+            
+			</el-table>
+		</el-drawer>
+		<!-- ++++++++++++++++ 预览电影截图 end ++++++++++++++-->
+		
+		<el-table :data="tableData" ref='table'>
 			<el-table-column prop="id" label="视频" min-width='29'>
 				<!--<img style="width:80px;" src="../../build/logo.png" />-->
 				<template slot-scope="scope">
-					<img @click="handleClick(scope.row)" style="width:100%;" :src="scope.row.imgPathWeb" />
+					<img @click="toVedio(scope.row)" style="width:100%;" :src="scope.row.imgPathWeb" />
 				</template>
 			</el-table-column>
 			<el-table-column prop="name" label="路径"  min-width='70'>
 				<template slot-scope="scope">
-					<el-button @click="toImgPath(scope.row)" type="text" size="small" style="max-height: 500px">
+					<el-button @click="previewVideo(scope.row)" type="text" size="small" style="max-height: 500px">
 						{{scope.row.fileName}}</el-button>
 				</template>
 			</el-table-column>
@@ -32,7 +57,8 @@
 	        :page-sizes="[50, 100, 200, 300]"
 	        :page-size="pageSize"
 	        layout="total, sizes, prev, pager, next"
-	        :total="totalNum">
+	        :total="totalNum"
+	        >
 	      </el-pagination>
 	</dev>
 </template>
@@ -44,6 +70,9 @@
 	export default {
 		data() {
 			return {
+				drawer: false,
+        			innerDrawer: false,
+        			imgData: {},
 				tableData: [{
 					id: '2016-05-02',
 					name: '王小虎',
@@ -80,7 +109,10 @@
 	        handleCurrentChange(val) {
 	        		this.pageNo = val;
 	            console.log(`当前页: ${val}`);
-	            this.refreshItem(this.pageNo, this.pageSize)
+	            this.refreshItem(this.pageNo, this.pageSize);
+//				this.$refs.table.bodyWrapper.scrollTop = 0
+				window.scrollTo(0,0);
+
 	        },
 	        
 	        refreshItem (pageNo, pageSize){
@@ -106,23 +138,39 @@
 				console.log(this._data);
 				this.refreshItem(this.pageNo, this.pageSize);
 			},
-			handleClick(row) {
+			toVedio(row) {
 				console.log(row);
-				this.$router.push({
-					path: '/video1',
-					query: {
+				
+				let routeUrl = this.$router.resolve({
+				     path: "/video1",
+				     query: {
 						filePathWeb: row.filePathWeb
-					}
-				})
+					 }
+			     });
+			   	 window.open(routeUrl.href, '_blank');
 			},
-			toImgPath(row) {
+			previewVideo(row) {
+				this.drawer = true;
+				
 				console.log(row.id);
-				this.$router.push({
-					path: '/imgList',
-					query: {
-						videoFileId: row.id
-					}
-				})
+				var outThis = this;
+			  	axios.post('/api/movie/imgFile/list', {
+			    		videoFileId: row.id
+				  })
+				  .then(function (response) {
+				  	console.log(response.data.data);
+				  	outThis._data.imgData = response.data.data
+				  })
+				  .catch(function (error) {
+				    console.log(error);
+				  });
+				  
+//				this.$router.push({
+//					path: '/imgList',
+//					query: {
+//						videoFileId: row.id
+//					}
+//				})
 			},
 			onSubmit() {
 		    		console.log(this.form.fileName);
