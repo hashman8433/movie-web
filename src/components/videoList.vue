@@ -14,6 +14,7 @@
 		  title="预览图片"
 		  :visible.sync="drawer"
 		  size="80%"
+		  append-to-body=true
 		  :with-header="false">
 		  <span>预览电影</span>
 		  <el-table
@@ -35,13 +36,14 @@
 		<!-- ++++++++++++++++ 预览电影截图 end ++++++++++++++-->
 		
 		<el-table :data="tableData" ref='table'>
-			<el-table-column prop="id" label="视频" min-width='29'>
+			<el-table-column prop="id" label="视频" min-width='40'>
 				<!--<img style="width:80px;" src="../../build/logo.png" />-->
 				<template slot-scope="scope">
-					<img @click="toVedio(scope.row)" style="width:100%;" :src="scope.row.imgPathWeb" />
+					<img @click="toVedio(scope.row)" style="width:10%;min-width: 150px;" 
+						:src="scope.row.imgPathWeb" />
 				</template>
 			</el-table-column>
-			<el-table-column prop="name" label="路径"  min-width='70'>
+			<el-table-column prop="name" label="文件名"  min-width='50'>
 				<template slot-scope="scope">
 					<el-button @click="previewVideo(scope.row)" type="text" size="small" style="max-height: 500px">
 						{{scope.row.fileName}}</el-button>
@@ -56,8 +58,11 @@
 	        :current-page="pageNo"
 	        :page-sizes="[50, 100, 200, 300]"
 	        :page-size="pageSize"
-	        layout="total, sizes, prev, pager, next"
+	        layout="total, prev, pager, next"
 	        :total="totalNum"
+	        pager-count="5"
+	        background=true
+	        small=true
 	        >
 	      </el-pagination>
 	</dev>
