@@ -4,9 +4,13 @@
     <ul>
       
       <!--<li><router-link to="/video1" class="nav-link">video1</router-link></li>-->
+      
+      <li><el-button  @click="checkImgIsExist()" class="nav-link">重置视频状态（图片生成异常）</el-button></li>
+      <li><el-button  @click="updateFiles()" class="nav-link">扫描新视频</el-button></li>
+      <li><el-button  @click="generateImg()" class="nav-link">生成图片</el-button></li>
+      <br/>
       <li><router-link to="/videoUpload" class="nav-link">上传视频</router-link></li>
       <li><router-link to="/videoList" class="nav-link">视频列表</router-link></li>
-      <li><el-button  @click="generateImg()" class="nav-link">生成图片</el-button></li>
     </ul>
   </div>
 </template>
@@ -22,6 +26,32 @@
 	    }
 	  },
 	  methods: {
+	  	checkImgIsExist() {
+	  		var outThis = this
+		  	axios.post('/api/movie/videoFile/checkImgIsExist', {})
+				.then(function(response) {
+					outThis.$message({
+						type: 'success',
+						message: '正在生成中 请稍后~'
+						});
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+			},
+			updateFiles() {
+	  		var outThis = this
+		  	axios.post('/api/movie/videoFile/updateFiles', {})
+				.then(function(response) {
+					outThis.$message({
+						type: 'success',
+						message: '正在生成中 请稍后~'
+						});
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+			},
 	  	generateImg() {
 	  		var outThis = this
 		  	axios.post('/api/movie/videoFile/generateImg', {})
@@ -34,7 +64,7 @@
 				.catch(function(error) {
 					console.log(error);
 				});
-		}
+			}			
 	  }
 	}
 </script>

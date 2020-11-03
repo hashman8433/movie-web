@@ -2,7 +2,7 @@
 	<dev>
 		<el-form :inline="true"	>
 			<el-form-item label="影片名称" label-width="auto">
-				<el-input v-model="form.fileName" label-width="60%"></el-input>
+				<el-input v-model="form.fileName" label-width="60%" @change="onSubmit"> </el-input>
 			</el-form-item>
 			<el-form-item label-width="10%">
 				<el-button type="primary" @click="onSubmit">搜索</el-button>
@@ -182,7 +182,10 @@
 				var outThis = this;
 				this.refreshItem(this.pageNo, this.pageSize);
 				
-		    }
+		   },
+		   onEnter() {
+		   		console.log(123);
+		   }
 
 		}
 
