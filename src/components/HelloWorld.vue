@@ -5,12 +5,21 @@
       
       <!--<li><router-link to="/video1" class="nav-link">video1</router-link></li>-->
       
-      <li><el-button  @click="checkImgIsExist()" class="nav-link">重置视频状态（图片生成异常）</el-button></li>
-      <li><el-button  @click="updateFiles()" class="nav-link">扫描新视频</el-button></li>
-      <li><el-button  @click="generateImg()" class="nav-link">生成图片</el-button></li>
+      <li><el-button  @click="checkImgIsExist()" class="nav-link">重置视频状态</el-button></li>
       <br/>
+      <br/>
+      <li><el-button  @click="updateFiles()" class="nav-link">扫描新视频</el-button></li>
+    	<br/>
+    	<br/>
+      <li><el-button  @click="generateImg()" class="nav-link">生成图片</el-button></li>
+    	<br/>
+    	<br/>
       <li><router-link to="/videoUpload" class="nav-link">上传视频</router-link></li>
+    	<br/>
+    	<br/>
       <li><router-link to="/videoList" class="nav-link">视频列表</router-link></li>
+    	<br/>
+    	<br/>
     </ul>
   </div>
 </template>
@@ -19,10 +28,10 @@
 	const axios = require('axios');
 		
 	export default {
-	  name: 'freeMovie',
+	  name: '家庭影院',
 	  data () {
 	    return {
-	      msg: 'freeMovie'
+	      msg: '家庭影院'
 	    }
 	  },
 	  methods: {

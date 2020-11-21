@@ -1,13 +1,16 @@
 <template>
 	<dev>
+		
 		<el-form :inline="true"	>
-			<el-form-item label="影片名称" label-width="auto">
+			<i style="font-size: 30px;float: left;" class="el-icon-s-home" @click="toIndex" ></i>
+
+			<el-form-item label="" label-width="auto">
 				<el-input v-model="form.fileName" label-width="60%" @change="onSubmit"> </el-input>
 			</el-form-item>
 			<el-form-item label-width="10%">
 				<el-button type="primary" @click="onSubmit">搜索</el-button>
 			</el-form-item>
-		</el-form>
+					</el-form>
 		
 		<!-- ++++++++++++++++ 预览电影截图 start ++++++++++++++-->
 		<el-drawer
@@ -60,11 +63,12 @@
 	        :page-size="pageSize"
 	        layout="total, prev, pager, next"
 	        :total="totalNum"
-	        pager-count="5"
+	        pager-count=5
 	        background=true
 	        small=true
 	        >
-	      </el-pagination>
+      	</el-pagination>
+	      
 	</dev>
 </template>
 
@@ -115,7 +119,6 @@
 	        		this.pageNo = val;
 	            console.log(`当前页: ${val}`);
 	            this.refreshItem(this.pageNo, this.pageSize);
-//				this.$refs.table.bodyWrapper.scrollTop = 0
 				window.scrollTo(0,0);
 
 	        },
@@ -134,6 +137,8 @@
 						outThis._data.totalNum = respData.totalElements;
 						outThis._data.totalPages = respData.totalPages;
 						outThis._data.pageSize = respData.size;
+						outThis._data.pagerCount = respData.totalPages;
+
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -173,15 +178,17 @@
 //				this.$router.push({
 //					path: '/imgList',
 //					query: {
-//						videoFileId: row.id
 //					}
 //				})
 			},
 			onSubmit() {
-		    		console.log(this.form.fileName);
+	    		console.log(this.form.fileName);
 				var outThis = this;
 				this.refreshItem(this.pageNo, this.pageSize);
 				
+		   },
+		   toIndex() {
+		   		this.$router.go(-1);//返回上一层
 		   },
 		   onEnter() {
 		   		console.log(123);
