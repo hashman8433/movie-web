@@ -3,7 +3,6 @@
     <h1>{{ msg }}</h1>
     <ul>
       
-      <!--<li><router-link to="/video1" class="nav-link">video1</router-link></li>-->
       
       <li><el-button  @click="checkImgIsExist()" class="nav-link">重置视频状态</el-button></li>
       <br/>
@@ -12,6 +11,9 @@
     	<br/>
     	<br/>
       <li><el-button  @click="generateImg()" class="nav-link">生成图片</el-button></li>
+    	<br/>
+    	<br/>
+    	<li><el-button  @click="toSystemConfig()" class="nav-link">配置系统参数</el-button></li>
     	<br/>
     	<br/>
       <li><router-link to="/videoUpload" class="nav-link">上传视频</router-link></li>
@@ -73,7 +75,10 @@
 				.catch(function(error) {
 					console.log(error);
 				});
-			}			
+			},
+			toSystemConfig() {
+				 this.$router.push('/system/config')
+			}
 	  }
 	}
 </script>

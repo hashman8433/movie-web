@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import video1 from '@/components/video1'
+import index from '@/components/index'
+import videoPlay from '@/components/videoPlay'
 import videoList from '@/components/videoList'
 import imgList from '@/components/imgList'
+import systemConfig from '@/components/systemConfig'
 // import videoUpload from '@/components/videoUpload'
 
 Vue.use(Router)
@@ -12,13 +13,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'index',
+      component: index
     },
     {
-      path: '/video1',
-      name: 'video1',
-      component: video1
+      path: '/videoPlay',
+      name: 'videoPlay',
+      component: videoPlay
     },
     {
       path: '/videoList',
@@ -33,7 +34,14 @@ export default new Router({
       path: '/imgList',
       name: 'imgList',
       component: imgList
-    }
+    },
+    {
+      path: '/system/config',
+      name: 'systemConfig',
+      component: systemConfig
+    },
+    
+    
     
 //  {
 //    path: '/videoUpload',
